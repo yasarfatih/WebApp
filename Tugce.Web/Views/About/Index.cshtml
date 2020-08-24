@@ -1,0 +1,38 @@
+﻿@model Tugce.Domain.POCO.SiteStatic
+
+@{
+    ViewBag.Title = "Biz Kimiz";
+}
+
+
+@Html.Partial("_Navigation")
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <h2>@Model.AboutTitle</h2>
+                <p>
+                    @Html.Raw(Model.AboutContent)
+                </p>
+            </div>
+            <div class="span6">
+                <!-- start flexslider -->
+                <video controls>
+                    <source src="/Content/files/@Model.VideoFile" type="video/mp4">
+                    Tarayıcınız HTML 5 video oynatıcısını desteklemiyor.
+                </video>
+                <!-- end flexslider -->
+            </div>
+        </div>
+        <!-- divider -->
+        <div class="row">
+            <div class="span12">
+                <div class="solidline">
+                </div>
+            </div>
+        </div>
+        <!-- end divider -->
+
+    </div>
+</section>

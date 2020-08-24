@@ -1,0 +1,63 @@
+﻿@model TopMenuModel
+
+@{
+    var controller = Model.Controller;
+}
+
+
+
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="logo" style="margin: 20px !important">
+                    <a href="/Home/Index"><img src="~/Content/images/@Model.LogoImage" alt="" class="logo" /></a>
+                    <h1>@Model.SloganTitle</h1>
+                </div>
+            </div>
+            <div class="span8">
+                <div class="navbar navbar-static-top">
+                    <div class="navigation">
+                        <nav>
+                            <ul class="nav topnav">
+                                <li class="@((controller=="Home")?"active":"")">
+                                    <a href="@Url.Action("Index","Home")">
+                                        Ana Sayfa
+                                    </a>
+                                </li>
+                                <li class="dropdown @((controller=="Service")?"active":"")">
+                                    <a href="@Url.Action("Detail","Service")">
+                                        Hizmetlerimiz <i class="icon-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @{
+                                            foreach (var category in Model.Categories)
+                                            {
+                                                <li><a href="/Hizmetlerimiz/@category.CategoryName.ParseStringToFormalUrl()-hizmetlerimiz/@category.Id">@category.CategoryName</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                                <li class="@((controller=="Portfolio")?"active":"")">
+                                    <a href="@Url.Action("Index","Portfolio")">
+                                        Portfolio
+                                    </a>
+                                </li>
+                                <li class="@((controller=="About")?"active":"")">
+                                    <a href="/Hakkimizda/@Model.Firma.ParseStringToFormalUrl()-kimdir">
+                                        Hakkımızda
+                                    </a>
+                                </li>
+                                <li class="@((controller=="Contact")?"active":"")">
+                                    <a href="/@Model.Firma.ParseStringToFormalUrl()/bize-ulasin">İletişim</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- end navigation -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->

@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Hizmetlerimiz";
+}
+
+
+@model IEnumerable<Tugce.Domain.POCO.Category>
+
+
+@Html.Partial("_Navigation")
+
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="portfolio-categ filter">
+                    <li class="all active"><a href="#">All</a></li>
+                    @{
+                        foreach (var category in Model)
+                        {
+                            <li class="@category.CategoryName.ParseStringToFormalUrl()">
+                    <a href="#" title="">@category.CategoryName</a></li>
+                        }
+                    }
+                </ul>
+                <div class="clearfix">
+                </div>
+                <div class="row">
+                    <section id="projects">
+                        <ul id="thumbs" class="portfolio">
+
+                            @{
+                                foreach (var category in Model.OrderByDescending(c=>c.Priority))
+                                {
+                                    foreach (var product in category.Products.OrderByDescending(p=>p.Priority))
+                                    {
+                                        <li class="item-thumbs span6 design" data-id="id-0" data-type="@category.CategoryName.ParseStringToFormalUrl()">
+                                            <!-- Fancybox - Gallery Enabled - Title - Full Image -->
+                                            <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="@category.CategoryName" href="~/Content/product/full/@product.FileName">
+                                                <span class="overlay-img"></span>
+                                                <span class="overlay-img-thumb font-icon-plus"></span>
+                                            </a>
+                                            <!-- Thumb Image and Description -->
+                                            <img src="~/Content/product/thumb/@product.FileName" alt="@product.ProductName<br/><a href='/Product/@product.Id/@product.ProductName.ParseStringToFormalUrl()' class='btn btn-primary' style='padding:5px;margin-top:15px'>Detaylar</a>">
+                                        </li>
+                                    }
+                                }
+                            }
+
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

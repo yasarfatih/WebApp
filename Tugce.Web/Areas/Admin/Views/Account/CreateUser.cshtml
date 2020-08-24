@@ -1,0 +1,102 @@
+﻿@model Tugce.Domain.VM.LoginWithImage
+
+@{ 
+    ViewBag.Title = "Kullanıcı Oluştur";
+}
+
+
+@using (Html.BeginForm("CreateUser", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Login.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Login.UserName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Login.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Login.Password, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PasswordAgain, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PasswordAgain, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserRoles, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @for (int i = 0; i < Model.UserRoles.Count; i++)
+            {
+                @Html.HiddenFor(m => m.UserRoles[i].RoleId)
+                @Html.HiddenFor(m => m.UserRoles[i].RoleName)
+                @Html.CheckBoxFor(m => m.UserRoles[i].IsChecked) @:&nbsp; @Model.UserRoles[i].RoleName
+            }
+
+            @*@foreach (var role in Model.UserRoles)
+            {
+                @Html.HiddenFor(m => role.RoleId)
+                @Html.HiddenFor(m => role.RoleName)
+                @Html.CheckBoxFor(m => role.IsChecked) @role.RoleName
+            }*@
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Login.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Login.Name, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Login.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Login.Surname, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PostedFile, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+
+@section Scripts{
+
+    @Scripts.Render("~/Admin/cropper/js")
+
+    <script>
+        //kırpma işlemine ait fonksiyon
+        $.CropImage('@Html.IdFor(m=>m.PostedFile)');
+    </script>
+
+}
+
+
+@section Styles{
+    
+    @Styles.Render("~/Admin/cropper/css")
+
+}

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Tugce.Domain.POCO.Slider>
+    
+@using Tugce.Utils
+
+<section id="featured">
+    <!-- start slider -->
+    <div id="da-slider" class="da-slider">
+
+        @{
+            foreach (var slide in Model)
+            {
+                <div class="da-slide">
+                    <h2>@slide.Title</h2>
+                    <p>
+                        @slide.Description
+                    </p>
+                    <a href="/Slider/@slide.Id/@slide.Title.ParseStringToFormalUrl()" class="da-link">Detaylar</a>
+                    <div class="da-img">
+                        <img src="~/Content/slider/@slide.FileName" alt="@slide.Title" />
+                    </div>
+                </div>
+            }
+        }
+
+        <nav class="da-arrows">
+            <span class="da-arrows-prev"></span>
+            <span class="da-arrows-next"></span>
+        </nav>
+    </div>
+    <!-- end slider -->
+</section>

@@ -1,0 +1,82 @@
+﻿
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- css -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="~/Content/site/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/site/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="~/Content/site/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+    <link href="~/Content/site/css/jcarousel.css" rel="stylesheet" />
+    <link href="~/Content/site/css/flexslider.css" rel="stylesheet" />
+    <link href="~/Content/site/css/cslider.css" rel="stylesheet" />
+    <link href="~/Content/site/css/style.css" rel="stylesheet" />
+    <!-- Theme skin -->
+    <link id="t-colors" href="~/Content/site/skins/default.css" rel="stylesheet" />
+    <!-- boxed bg -->
+    <link id="bodybg" href="~/Content/site/bodybg/bg1.css" rel="stylesheet" type="text/css" />
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/site/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/site/ico/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/site/ico/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="~/Content/site/ico/apple-touch-icon-57-precomposed.png" />
+    <link rel="shortcut icon" href="~/Content/site/ico/favicon.png" />
+
+    <!-- =======================================================
+      Theme Name: Flattern
+      Theme URL: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/
+      Author: BootstrapMade.com
+      Author URL: https://bootstrapmade.com
+    ======================================================= -->
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- start header -->
+        
+        @{Html.RenderAction("Menu", "Home");}
+
+        @RenderSection("PageHeader", false)
+
+        @RenderBody()
+
+        @{Html.RenderAction("SiteStatic", "Home");}
+
+    </div>
+    <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-32 active"></i></a>
+    <!-- javascript
+      ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Content/site/js/jquery.js"></script>
+    <script src="~/Content/site/js/jquery.easing.1.3.js"></script>
+    <script src="~/Content/site/js/bootstrap.js"></script>
+    <script src="~/Content/site/js/jcarousel/jquery.jcarousel.min.js"></script>
+    <script src="~/Content/site/js/jquery.fancybox.pack.js"></script>
+    <script src="~/Content/site/js/jquery.fancybox-media.js"></script>
+    <script src="~/Content/site/js/google-code-prettify/prettify.js"></script>
+    <script src="~/Content/site/js/portfolio/jquery.quicksand.js"></script>
+    <script src="~/Content/site/js/portfolio/setting.js"></script>
+    <script src="~/Content/site/js/jquery.flexslider.js"></script>
+    <script src="~/Content/site/js/jquery.nivo.slider.js"></script>
+    <script src="~/Content/site/js/modernizr.custom.js"></script>
+    <script src="~/Content/site/js/jquery.ba-cond.min.js"></script>
+    <script src="~/Content/site/js/jquery.slitslider.js"></script>
+    <script src="~/Content/site/js/modernizr.custom.28468.js"></script>
+    <script src="~/Content/site/js/jquery.cslider.js"></script>
+    <script src="~/Content/site/js/animate.js"></script>
+
+    <!-- Template Custom JavaScript File -->
+    <script src="~/Content/site/js/custom.js"></script>
+
+    @RenderSection("Scripts",false)
+
+</body>
+
+</html>

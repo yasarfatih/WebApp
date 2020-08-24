@@ -1,0 +1,104 @@
+﻿@model Tugce.Domain.VM.ProductWithImage
+
+@{
+    ViewBag.Title = "Ürün Güncelle";
+}
+
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(m => m.Product.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m=>m.Product.CategoryId,(IEnumerable<SelectListItem>)TempData["categories"],"",
+               new {
+                   @class="form-control"
+               })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/Content/product/thumb/@Model.Product.FileName" class="img-responsive img-rounded img-thumbnail" style="width:120px" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostedImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.PostedImage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.Priority, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Product.Description, new { @row = 10 })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Product.IsActive)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts{
+
+    @Scripts.Render("~/Admin/Select2/js")
+
+    @Scripts.Render("~/Admin/ckEditor")
+
+    @Scripts.Render("~/Admin/cropper/js")
+
+    <script>
+        $.CK('@Html.NameFor(m=>m.Product.Description)', '@Url.Content("~/Areas/Admin/Content/plugins/ck/ckfinder/")')
+
+        //Select kontrolüne ait fonsiyon
+        $.Select('@Html.IdFor(m => m.Product.CategoryId)','Kategori Seçiniz')
+        //kırpma işlemine ait fonksiyon
+        $.CropImage('@Html.IdFor(m=>m.PostedImage)',57/40);
+    </script>
+
+}
+
+
+@section Styles{
+
+    @Styles.Render("~/Admin/Select2/css")
+
+    @Styles.Render("~/Admin/cropper/css")
+
+
+}

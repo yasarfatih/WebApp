@@ -1,0 +1,90 @@
+﻿@using System.Xml.Linq
+@using Tugce.DataContext
+
+@{
+    IEnumerable<XElement> menuElements = null;
+    //sunucunun ram belleğinde daha önce saklanmış bir xml içeriği yoksa
+    if(Cache["menu"]==null)
+    {
+        //dosyayı oku
+        var xmlPath = Server.MapPath("~/Areas/Admin/Models/LeftMenu.xml");
+        menuElements = XDocument.Load(xmlPath).Element("root").Elements("menu");
+        //menülere ait xml içeriğini menu isminde bir Cache olarak ekle
+        Cache.Insert("menu", menuElements,new System.Web.Caching.CacheDependency(xmlPath));
+    }
+    else
+    {
+        //daha önce cachlenen menu içeriğini getir.
+        menuElements= Cache["menu"] as IEnumerable<XElement>;
+    }
+
+
+    var userName = User.Identity.Name;
+    var entities = new TugceContext();
+    var roles = new List<string>
+    {
+        "all"
+    };
+    if (!string.IsNullOrEmpty(userName))
+    {
+        //oturum açan kullanıcının sahip olduğu rollerin id değerlerini elde ediyoruz.
+        var userRoleIds = entities.Logins.Include("UserRoles")
+            .SingleOrDefault(u => u.UserName == userName).UserRoles.Select(ur => ur.RoleId);
+        //bu rol id değerleri ile işleşen rollerin adlarını elde ediyoruz.
+        var roleNames = entities.Roles.Where(r => userRoleIds.Contains(r.Id)).Select(r => r.RoleName);
+        //kullanıcının tüm rollerini bir string koleksiyonda saklıyoruz.
+        roles.AddRange(roleNames);
+    }
+}
+
+
+<!-- sidebar menu start-->
+<ul class="sidebar-menu" id="nav-accordion">
+
+    @{
+        var counter = 1;
+        foreach (var menu in menuElements)
+        {
+            var menuReqRoles = menu.Attribute("role").Value.Split(',');
+            if (roles.Intersect(menuReqRoles).Count() != 0)
+            {
+                if (menu.Elements("submenu").Count() != 0)
+                {
+                    //bu ana menü alt menüye sahip
+                    <li class="sub-menu">
+                        <a href="javascript:;" data-id="@(counter++)">
+                            <i class="icon-laptop"></i>
+                            <span>@menu.Attribute("title").Value</span>
+                        </a>
+                        <ul class="sub">
+                            @foreach (var submenu in menu.Elements("submenu"))
+                            {
+                                var subMenuReqRoles = submenu.Attribute("role").Value.Split(',');
+                                if (roles.Intersect(subMenuReqRoles).Count() != 0)
+                                {
+                                    <li>
+                                        <a href="/Admin/@submenu.Attribute("controller").Value/@submenu.Attribute("action").Value">
+                                            @submenu.Value
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    //bu menü tekil bir menü.alt menüye sahip değil
+                    <li>
+                        <a href="/Admin/@menu.Attribute("controller").Value/@menu.Attribute("action").Value">
+                            <i class="icon-dashboard"></i>
+                            <span>@menu.Attribute("title").Value</span>
+                        </a>
+                    </li>
+                }
+            }
+        }
+    }
+
+</ul>
+<!-- sidebar menu end-->

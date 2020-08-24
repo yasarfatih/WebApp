@@ -1,0 +1,209 @@
+﻿@model Tugce.Domain.VM.StaticWithImage
+
+@{
+    ViewBag.Title = "Site Sabitleri";
+}
+
+@using (Html.BeginForm("Edit", "Static", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="form-horizontal">
+
+    @Html.HiddenFor(m => m.SiteStatic.Id)
+
+    @Html.HiddenFor(m => m.SiteStatic.VideoFile)
+
+    @Html.HiddenFor(m => m.SiteStatic.LogoFile)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.AboutTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.AboutTitle, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.AboutContent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.SiteStatic.AboutContent)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Footer, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Footer, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Firma, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Firma, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PostedFile)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PostedImage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PostedImage)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.SloganTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.SloganTitle, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Phone1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Phone1, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Phone2, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Phone2, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Mobile1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Mobile1, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Mobile2, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Mobile2, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Address, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Email, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Facebook, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Facebook, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Twitter, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Twitter, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.LinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.LinkedIn, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Pinterest, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Pinterest, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.AdminEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.AdminEmail, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.AdminEmailUser, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.AdminEmailUser, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.AdminEmailPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.AdminEmailPassword, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SiteStatic.Location, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SiteStatic.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.SiteStatic.IsActive)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+
+@section Scripts{
+
+    @Scripts.Render("~/Admin/ckEditor")
+
+    @Scripts.Render("~/Admin/inputmask/js")
+
+    @Scripts.Render("~/Admin/cropper/js")
+
+
+    <script>
+        $.CK('@Html.NameFor(m=>m.SiteStatic.AboutContent)', '@Url.Content("~/Areas/Admin/Content/plugins/ck/ckfinder/")')
+
+        $.UploadFile('@Html.IdFor(m=>m.PostedFile)')
+        $.CropImage('@Html.IdFor(m=>m.PostedImage)')
+
+        $.Mask('@Html.IdFor(m=>m.SiteStatic.Phone1)', '(999) 999 99 99')
+        $.Mask('@Html.IdFor(m=>m.SiteStatic.Phone2)', '(999) 999 99 99')
+        $.Mask('@Html.IdFor(m=>m.SiteStatic.Mobile1)', '(999) 999 99 99')
+        $.Mask('@Html.IdFor(m=>m.SiteStatic.Mobile2)','(999) 999 99 99')
+    </script>
+
+}
+
+@section Styles{
+
+    @Styles.Render("~/Admin/cropper/css")
+
+}

@@ -1,0 +1,47 @@
+﻿@model Tugce.Domain.POCO.Product
+
+@{
+    ViewBag.Title = Model.ProductName;
+}
+
+@Html.Partial("_Navigation")
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="top-wrapper">
+                        <div class="post-heading">
+                            <h3><a href="#">@Model.ProductName</a></h3>
+                        </div>
+                        <!-- start flexslider -->
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li>
+                                    <img src="~/Content/product/thumb/@Model.FileName" alt="@Model.ProductName"
+                                         class="img-responsive" style="width:50%"/>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end flexslider -->
+                    </div>
+                    <p>
+                        @Html.Raw(Model.Description)
+                    </p>
+                </article>
+            </div>
+            <div class="span4">
+                <aside class="right-sidebar">
+                    <div class="widget">
+                        <h5 class="widgetheading">Ürüne ait diğer bilgiler</h5>
+                        <ul class="folio-detail">
+                            <li><label>Kategori :</label> @Model.Category.CategoryName</li>
+                            <li><label>Kayıt Tarihi :</label> @Model.CreateDate.ToString("dd.MM.yyyy")</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>

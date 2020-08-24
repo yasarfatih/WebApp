@@ -1,0 +1,78 @@
+﻿
+@model SliderWithImage
+
+@{
+    ViewBag.Title = "Slider Oluştur";
+}
+
+@using (Html.BeginForm("Create", "Slider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slider.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slider.Title, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slider.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slider.Description, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PostedFile)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slider.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Slider.Detail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Slider.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Slider.IsActive)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/Admin/ckEditor")
+
+    @Scripts.Render("~/Admin/cropper/js")
+
+    <script>
+        $.CK('@Html.NameFor(m=>m.Slider.Detail)', '@Url.Content("~/Areas/Admin/Content/plugins/ck/ckfinder/")')
+
+        //kırpma işlemine ait fonksiyon
+        $.CropImage('@Html.IdFor(m=>m.PostedFile)');
+    </script>
+
+}
+
+
+@section Styles{
+
+    @Styles.Render("~/Admin/cropper/css")
+
+}

@@ -1,0 +1,86 @@
+﻿
+@model Tugce.Domain.POCO.Message
+
+@{
+    ViewBag.Title = "Bize Ulaşın";
+}
+
+@Html.Partial("_Navigation")
+
+<section id="content">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="span12">
+                @Html.Raw(ViewBag.Location)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <h4>Bize Yazın</h4>
+
+                <div id="sendmessage" class="text-success"></div>
+                <div id="errormessage" class="text-danger"></div>
+
+                @{
+                    //messagesended isimli Cookie varsa bugün mesaj göndermiş
+                    if (Request.Cookies["messagesended"] != null)
+                    {
+                        <div class="text-success">
+                            Bugün için mesaj gönderme limitinizi doldurdunuz.
+                        </div>
+                    }
+                    else
+                    {
+                        <form method="post" role="form"
+                              id="contact-form" class="contactForm">
+                            <div class="row">
+                                <div class="span4 form-group">
+                                    <input type="text" name="@Html.NameFor(m => m.From)"
+                                           class="form-control" id="@Html.IdFor(m => m.From)"
+                                           placeholder="Adınız" />
+                                </div>
+                                <div class="span4 form-group">
+                                    <input type="email" class="form-control" name="@Html.NameFor(m=>m.Email)"
+                                           id="@Html.IdFor(m=>m.Email)" placeholder="Eposta adresiniz" />
+                                </div>
+                                <div class="span4 form-group">
+                                    <input type="text" class="form-control" name="@Html.NameFor(m=>m.Subject)"
+                                           id="@Html.IdFor(m=>m.Subject)" placeholder="Konu" />
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="span12 margintop10 form-group">
+                                    <textarea class="form-control" name="@Html.NameFor(m=>m.Body)"
+                                              id="@Html.IdFor(m=>m.Body)"
+                                              rows="12" placeholder="Mesajınızı buraya yazınız."></textarea>
+                                    <div class="validation"></div>
+
+                                    <div class="g-recaptcha" data-sitekey="6LfCP_UUAAAAAIMlWORh17jVik8ep42TyiFegKCF"></div>
+
+                                    <p class="text-center">
+                                        <button class="btn btn-large btn-theme margintop10" type="button" id="send-form">Gönder</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    }
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+
+    <script type="text/javascript" src="~/Content/site/js/site-script.js"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+}
+
+

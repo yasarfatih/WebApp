@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Tugce.Domain.POCO.Category>
+
+@{
+    ViewBag.Title = "Kayıtlı Kategoriler";
+}
+
+<table class="table table-hover table-bordered table-responsive display" id="categories">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="row-@item.Id">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+
+                <td>
+                    @((item.IsActive) ? "Aktif" : "Pasif")
+                </td>
+
+                <td>
+                    @Html.ActionLink("Güncelle", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+                    <a href="#" class="btn btn-danger delete" data-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section Styles{
+
+    @Styles.Render("~/Admin/jconfirm/css")
+
+    @Styles.Render("~/Admin/DataTable/css")
+
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/Admin/jconfirm/js")
+
+    @Scripts.Render("~/Admin/DataTable/js")
+
+    <!--Silme işlemini ajax yardımıyla tetikliyoruz-->
+    <script>
+        $().ready(function () {
+            $(".delete").click(function () {
+                var id = $(this).data('id');
+                $.ShowConfirm("Kategori Silinecek", "Kategori tamamen silinecek. Devam edilsin mi?", "Evet Silebilirsin", function () {
+                    //Evet butonuna bastı
+                    //silme işlemini ajax ile gerçekleştir
+                    $.Delete('@Url.Action("Delete","Category")', id, function (result) {
+                        //Silme işlemini yapan action'dan gelen cevabı yakalıyoruz.
+                        if (result.Status == "ok") {
+                            $.ShowSuccess("İşlem başarılı", result.Message, "Tamam");
+                            $(".row-" + id).hide(300, function () {
+                                $(".row-" + id).remove();
+                            })
+                        }
+                        else {
+                            $.ShowError("Hata oluştu", result.Message, "Tamam");
+                        }
+                    })
+                }, "Vazgeçtim")
+            })
+        })
+
+    </script>
+
+    <!--jquery datatable elementini ayarlıyoruz.-->
+    <script>$.DataTable("categories")</script>
+
+}

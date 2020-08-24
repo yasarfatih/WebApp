@@ -1,0 +1,39 @@
+﻿@model HttpPostedFileBase
+
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="crop-start">Kırp</span>
+            <div class="custom-file">
+                <input type="file" name="@Html.NameFor(m=>m)" class="custom-file-input" id="@Html.IdFor(m=>m)"
+                       aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Dosya Seçiniz</label>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="crop-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resmi Kırpabilirsiniz</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="crop-preview" />
+                    <input type="hidden" name="left" id="left" />
+                    <input type="hidden" name="top" id="top" />
+                    <input type="hidden" name="width" id="width" />
+                    <input type="hidden" name="height" id="height" />
+                    <input type="hidden" name="ratio" id="ratio" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary" id="crop-complate">Kırp</button>
+                </div>
+            </div>
+        </div>
+    </div>

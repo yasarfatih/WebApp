@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Ana Sayfa";
+}
+
+@{ 
+    var entities = new Tugce.DataContext.TugceContext();
+    var sliders = entities.Sliders.Where(s => s.IsActive).ToList();
+}
+
+@section PageHeader{
+
+    @Html.Partial("_Slider",sliders)
+
+}
+
